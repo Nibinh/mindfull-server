@@ -5,15 +5,15 @@ const cookieparser = require("cookie-parser");
 
 const server = express();
 
-server.use(express.json());
-server.use(cookieparser());
-dotenv.config();
 server.use(
   cors({
     origin: "https://mindfull-client.onrender.com",
     credentials: true,
   })
 );
+server.use(express.json());
+server.use(cookieparser());
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
