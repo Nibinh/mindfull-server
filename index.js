@@ -11,7 +11,7 @@ server.use(cookieparser());
 server.use(
   cors({
     origin: "https://mindfull-client.onrender.com",
-    credentials: true,
+    // credentials: true,
   })
 );
 
