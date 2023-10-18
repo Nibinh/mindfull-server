@@ -116,13 +116,47 @@ const loginUser = async (req, res) => {
         email: data.email,
         name: data.name,
         id: data._id,
+        phone: data.phone,
+        gender: data.gender,
+        city: data.city,
+        state: data.state,
       });
   } catch (error) {
     console.log(error);
   }
 };
+
+//getAdmin
+
+const getAdminUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await Admin.findOne({ _id: id }).select(
+      "-password -otp -active"
+    );
+    if (!user) return res.status(400).send("no user found");
+    return res.status(200).json({ message: "User Found", user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occured" + error.message });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("token", { httpOnly: true, expires: new Date(0) });
+    res.status(200).send("Logout Successfull");
+    console.log("logoutuser");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
+  }
+};
+
 module.exports = {
   register,
   verifyUserWithOTP,
   loginUser,
+  getAdminUser,
+  logout,
 };
