@@ -7,7 +7,8 @@ const server = express();
 
 server.use(
   cors({
-    origin: "https://mindfull-client.onrender.com",
+    // origin: "https://mindfull-client.onrender.com",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
